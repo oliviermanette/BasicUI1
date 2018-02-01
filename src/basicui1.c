@@ -120,8 +120,6 @@ void tryToConnect(void *data, int lintMSG)
 			default :
 				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/start/%s",read_file("/csa/imei/serialno.dat"));
 		}
-
-
 		curl_easy_setopt(curl, CURLOPT_URL, lchrURL);
 
 		/* complete within 20 seconds */
