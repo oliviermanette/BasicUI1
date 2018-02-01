@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="2.3.1" package="org.example.basicui1" version="1.0.0">
+    <author email="info@flod.aero" href="http://www.flod.aero">Olivier F.L. Manette</author>
+    <profile name="wearable"/>
+    <ui-application appid="org.example.basicui1" exec="vaucheptms" multiple="false" nodisplay="false" taskmanage="true" type="capp">
+        <label>Vauché PTMS by FLOD</label>
+        <icon>new sans titre.png</icon>
+    </ui-application>
+    <privileges>
+        <privilege>http://tizen.org/privilege/haptic</privilege>
+        <privilege>http://tizen.org/privilege/internet</privilege>
+        <privilege>http://tizen.org/privilege/display</privilege>
+        <privilege>http://tizen.org/privilege/power</privilege>
+    </privileges>
+</manifest>
