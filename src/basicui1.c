@@ -14,6 +14,7 @@ bool gblConnected = 0;
 CURL *curl;
 CURLcode res;
 char buffer[100];
+const char gchrBaseURL[] = "http://192.168.0.37:8080";
 bool gblStart = 0;
 bool gblWouldStop = 0;
 
@@ -100,25 +101,25 @@ void tryToConnect(void *data, int lintMSG)
 		switch (lintMSG)
 		{
 			case 0:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/start/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/start/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			case 1:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/recording/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/recording/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			case 2:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/okstop/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/okstop/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			case 3:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/arrecording/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/arrecording/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			case 4:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/msgread/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/msgread/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			case 5:
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/canistop/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/canistop/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 				break;
 			default :
-				snprintf(lchrURL,1000,"http://192.168.0.37:8080/watch/start/%s",read_file("/csa/imei/serialno.dat"));
+				snprintf(lchrURL,1000,"%s/watch/start/%s",gchrBaseURL, read_file("/csa/imei/serialno.dat"));
 		}
 		curl_easy_setopt(curl, CURLOPT_URL, lchrURL);
 
@@ -316,9 +317,12 @@ void WriteBFile(void *user_data)
 				device_power_request_lock(POWER_LOCK_DISPLAY, 5000);
 
 				//defining the landing URL
+				char lchrURL[1000] = {0,};
+				snprintf(lchrURL,1000,"%s/upload",gchrBaseURL);
+				curl_easy_setopt(curl, CURLOPT_URL, lchrURL);
 				//curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.0.37:8888/upload");
 				//Avec Linux Mint l'URL est différente : 10.42.0.1:8888
-				curl_easy_setopt(curl, CURLOPT_URL, "http://10.42.0.1:8888/upload");
+				//curl_easy_setopt(curl, CURLOPT_URL, "http://10.42.0.1:8888/upload");
 				//curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.0.16:8888/upload");
 
 				snprintf(write_filepath,1000,"%s%s",resource_path,"fileAccZ.dat");
